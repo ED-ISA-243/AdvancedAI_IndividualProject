@@ -1,0 +1,17 @@
+# Ignore IDE configuration files
+.idea/
+
+# Ignore Python virtual environment folder
+venv/
+
+# Ignore data folder if you have large datasets you don't want to push
+data/
+
+# Ignore temporary system files (macOS, Windows, etc.)
+.DS_Store
+Thumbs.db
+
+# Ignore logs or temporary files
+*.log
+*.bak
+*.swp
