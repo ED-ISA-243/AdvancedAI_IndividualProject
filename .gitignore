@@ -15,3 +15,6 @@ Thumbs.db
 *.log
 *.bak
 *.swp
+
+# Ignore dataset that is too large to be pushed to the repository
+recipes_data/
