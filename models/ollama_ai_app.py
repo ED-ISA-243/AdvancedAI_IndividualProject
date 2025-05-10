@@ -79,7 +79,7 @@ def add_ingredient_from_enter():
     else:
         st.session_state.ingredients.append(ingredient)
         st.success(f"Added: {ingredient}")
-    st.session_state.ingredient_input = ""  # Safe in on_change context
+    st.session_state.ingredient_input = ""
 
 def main():
     st.set_page_config(page_title="AI Recipe Generator", layout="wide")
@@ -90,7 +90,7 @@ def main():
         st.session_state.ingredients = []
 
     st.text_input(
-        "Enter an ingredient:",
+        "Enter an ingredient (specify how much you have of this ingredient to get even better results):",
         key="ingredient_input",
         on_change=add_ingredient_from_enter
     )
