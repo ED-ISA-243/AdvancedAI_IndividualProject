@@ -36,21 +36,22 @@ def generate_recipes(ingredients):
         return "Insufficient ingredients."
 
     prompt = (
-        f"You are a professional chef. Create 3 original recipes using ONLY these ingredients: {', '.join(ingredients)}.\n\n"
-        "STRICT RULES (you must follow these exactly):\n"
-        "- Use ONLY the ingredients listed. Absolutely do NOT assume, invent, or add anything else.\n"
-        "- If an ingredient is not in the list, do NOT mention it — not even as an optional suggestion.\n"
-        "- Do NOT include phrases like 'let's assume', 'feel free to add', or 'optional'.\n\n"
-        "Format each recipe like this:\n"
-        "### 1. Recipe Title\n"
-        "**Ingredients:**\n"
-        "- item (quantity)\n"
-        "**Instructions:**\n"
-        "1. Step one...\n"
-        "2. Step two...\n\n"
-        "Write clearly and professionally, and keep your output strictly focused on the provided ingredients only."
-    )
-
+            f"You are a professional chef. Create 3 original recipes using ONLY these ingredients: {', '.join(ingredients)}.\n\n"
+            "STRICT RULES (you must follow these exactly):\n"
+            "- Use ONLY the ingredients listed. Absolutely do NOT assume, invent, or add anything else.\n"
+            "- If an ingredient is not in the list, do NOT mention it — not even as an optional suggestion.\n"
+            "- Do NOT include phrases like 'let's assume', 'feel free to add', or 'optional'.\n"
+            "- Each recipe must include **at least 5 instruction steps**, but feel free to use more if needed to explain the process clearly.\n\n"
+            "Format each recipe like this:\n"
+            "### 1. Recipe Title\n"
+            "**Ingredients:**\n"
+            "- item (quantity)\n"
+            "**Instructions:**\n"
+            "1. Step one...\n"
+            "2. Step two...\n"
+            "...\n\n"
+            "Write clearly and professionally, and keep your output strictly focused on the provided ingredients only."
+        )
 
     ollama = Client()
     max_attempts = 3
