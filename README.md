@@ -18,3 +18,7 @@ This repository contains the complete Python source code for my Advanced AI proj
 ### Additional Information
 - The included screenshot illustrates the training progress of the model on the entire dataset, highlighting the lengthy duration required for training.
 - A demonstration video (RecipeGeneratorUsage.mp4) is included in the repository, showing the application in action.
+
+
+### Important note
+This project is my August/September retake. I chose to continue with the recipe generator because I find it interesting, but this version is very different from my earlier one. In this project, I fine-tuned a model on prepared data, so the improvement is in the project as a whole rather than in single parts. Even though the recipe generator here works less well than my earlier version, it shows how fine-tuning changes a model and leads to more interesting results, which is the main goal of the project.
