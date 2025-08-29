@@ -1,13 +1,20 @@
-Recipe Generator – Advanced AI Project
+# Recipe Generator – Advanced AI Project
 
-This repository contains all of the Python source code for my Advanced AI project.
-It also contains additional files that all collectively have contributed to a finalized project.
-The project focuses on fine-tuning and deploying a recipe generation model.
+This repository contains the complete Python source code for my Advanced AI project, which focuses on fine-tuning and deploying a recipe generation model. In addition to the code, it includes supplementary files that collectively contribute to the finalized project.
 
-The base model Llama-3.2-1B-Instruct and the fine-tuned LoRA adapters are not included in this repository.
-These files are several gigabytes in size and exceed GitHub’s storage limits.
-Because of this, the repository is code-only. You can fully study and evaluate the scripts, but running them requires access to my exact local model setup, which is not provided here.
+### Data Files
+- val.jsonl is included in the repository.
+- train_lora.jsonl is not included due to its large size, although it shares the same data structure as val.jsonl. The file is simply too large to host on GitHub.
 
-Although the models themselves are missing due to size constraints, the repository clearly demonstrates the training pipeline, code structure, and integration into a desktop application.
+### Model Files
+- The base model, Llama-3.2-1B-Instruct, and the fine-tuned LoRA adapters are not part of this repository.
+- These models are several gigabytes in size and exceed GitHub’s storage limits.
+- Consequently, this repository is code-only. While you can study and evaluate the scripts fully, running them requires access to my exact local model setup, which is not provided here.
 
-If hypothetically the models could also be pushed to the repository, a user could easily just pull the repository which contains the app. Then simply open the app and run it, since the built-in virtual environment contains all needed packages etc.
+### Usage and Setup
+- Despite the absence of the model files due to size constraints, the repository clearly demonstrates the training pipeline, code structure, and integration within a desktop application.
+- Hypothetically, if the models were included, a user could simply clone the repository containing the app, open it, and run it directly. The built-in virtual environment includes all necessary packages to facilitate this.
+
+### Additional Information
+- The included screenshot illustrates the training progress of the model on the entire dataset, highlighting the lengthy duration required for training.
+- A demonstration video (RecipeGeneratorUsage.mp4) is included in the repository, showing the application in action.
