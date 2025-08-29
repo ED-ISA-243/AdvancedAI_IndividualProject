@@ -1,0 +1,57 @@
+(venv) edrikisaian@Mac AdvancedAI_IndividualProject % clear                                                                                                                      
+(venv) edrikisaian@Mac AdvancedAI_IndividualProject % python train_lora.py
+Map: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 9993/9993 [00:00<00:00, 102691.35 examples/s]
+Map (num_proc=2): 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████| 9993/9993 [00:01<00:00, 5665.33 examples/s]
+Truncating train dataset: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████| 9993/9993 [00:00<00:00, 422700.16 examples/s]
+  0%|                                                                                                                                                   | 0/1666 [00:00<?, ?it/s]/Users/edrikisaian/Documents/Advanced_AI/AdvancedAI_IndividualProject/venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py:684: UserWarning: 'pin_memory' argument is set as true but not supported on MPS now, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+{'loss': 1.6987, 'grad_norm': 1.2555840015411377, 'learning_rate': 9.8e-05, 'num_tokens': 57600.0, 'mean_token_accuracy': 0.6469459009170532, 'epoch': 0.03}                     
+{'loss': 1.1467, 'grad_norm': 0.8394426107406616, 'learning_rate': 9.977331605112937e-05, 'num_tokens': 115200.0, 'mean_token_accuracy': 0.7357242548465729, 'epoch': 0.06}      
+{'loss': 1.1312, 'grad_norm': 0.7782003283500671, 'learning_rate': 9.907681988091717e-05, 'num_tokens': 172800.0, 'mean_token_accuracy': 0.7382548010349274, 'epoch': 0.09}      
+{'loss': 1.1663, 'grad_norm': 0.9617900848388672, 'learning_rate': 9.791699258161966e-05, 'num_tokens': 230400.0, 'mean_token_accuracy': 0.728621289730072, 'epoch': 0.12}       
+{'loss': 1.1589, 'grad_norm': 0.828816294670105, 'learning_rate': 9.63047840088597e-05, 'num_tokens': 288000.0, 'mean_token_accuracy': 0.7313961625099182, 'epoch': 0.15}        
+{'loss': 1.1595, 'grad_norm': 0.8109821677207947, 'learning_rate': 9.425541492103507e-05, 'num_tokens': 345600.0, 'mean_token_accuracy': 0.7306806290149689, 'epoch': 0.18}      
+{'loss': 1.1044, 'grad_norm': 0.7983366250991821, 'learning_rate': 9.178823328110831e-05, 'num_tokens': 403200.0, 'mean_token_accuracy': 0.7407678890228272, 'epoch': 0.21}      
+{'loss': 1.1219, 'grad_norm': 0.8037368059158325, 'learning_rate': 8.892653159372128e-05, 'num_tokens': 460800.0, 'mean_token_accuracy': 0.7359162247180939, 'epoch': 0.24}      
+{'loss': 1.0782, 'grad_norm': 0.7655960917472839, 'learning_rate': 8.569732700214328e-05, 'num_tokens': 518400.0, 'mean_token_accuracy': 0.7431239116191865, 'epoch': 0.27}      
+{'loss': 1.125, 'grad_norm': 0.7580011487007141, 'learning_rate': 8.213110622114296e-05, 'num_tokens': 576000.0, 'mean_token_accuracy': 0.7365794050693512, 'epoch': 0.3}        
+{'loss': 1.0832, 'grad_norm': 0.8465434312820435, 'learning_rate': 7.826153771385708e-05, 'num_tokens': 633600.0, 'mean_token_accuracy': 0.7456544506549835, 'epoch': 0.33}      
+{'loss': 1.0914, 'grad_norm': 0.7649754285812378, 'learning_rate': 7.412515382997542e-05, 'num_tokens': 691200.0, 'mean_token_accuracy': 0.7419720768928528, 'epoch': 0.36}      
+{'loss': 1.0958, 'grad_norm': 0.8111262321472168, 'learning_rate': 6.976100590615551e-05, 'num_tokens': 748800.0, 'mean_token_accuracy': 0.7384816801548004, 'epoch': 0.39}      
+{'loss': 1.0559, 'grad_norm': 0.8825057744979858, 'learning_rate': 6.521029558484166e-05, 'num_tokens': 806400.0, 'mean_token_accuracy': 0.7486561918258667, 'epoch': 0.42}      
+{'loss': 1.0347, 'grad_norm': 0.6637097001075745, 'learning_rate': 6.051598583218435e-05, 'num_tokens': 864000.0, 'mean_token_accuracy': 0.7513612580299377, 'epoch': 0.45}      
+{'loss': 1.0917, 'grad_norm': 0.7288658022880554, 'learning_rate': 5.5722395327414446e-05, 'num_tokens': 921600.0, 'mean_token_accuracy': 0.7419371736049652, 'epoch': 0.48}     
+{'loss': 1.082, 'grad_norm': 0.6930920481681824, 'learning_rate': 5.087478005301689e-05, 'num_tokens': 979200.0, 'mean_token_accuracy': 0.7416230392456055, 'epoch': 0.51}       
+{'loss': 1.0195, 'grad_norm': 0.8096317052841187, 'learning_rate': 4.6018906035884006e-05, 'num_tokens': 1036800.0, 'mean_token_accuracy': 0.7557766103744507, 'epoch': 0.54}    
+{'loss': 1.1137, 'grad_norm': 0.7814686298370361, 'learning_rate': 4.120061727317192e-05, 'num_tokens': 1094400.0, 'mean_token_accuracy': 0.7332460725307465, 'epoch': 0.57}     
+{'loss': 1.1047, 'grad_norm': 0.835523784160614, 'learning_rate': 3.646540292204493e-05, 'num_tokens': 1152000.0, 'mean_token_accuracy': 0.7387783610820771, 'epoch': 0.6}       
+{'loss': 1.1012, 'grad_norm': 0.9330754280090332, 'learning_rate': 3.185796783944147e-05, 'num_tokens': 1209600.0, 'mean_token_accuracy': 0.7371378719806672, 'epoch': 0.63}     
+{'loss': 1.0681, 'grad_norm': 0.8137768507003784, 'learning_rate': 2.742181052636853e-05, 'num_tokens': 1267200.0, 'mean_token_accuracy': 0.7443280947208405, 'epoch': 0.66}     
+{'loss': 1.085, 'grad_norm': 0.9309252500534058, 'learning_rate': 2.319881246132558e-05, 'num_tokens': 1324800.0, 'mean_token_accuracy': 0.7441535806655883, 'epoch': 0.69}      
+{'loss': 1.0731, 'grad_norm': 0.8770075440406799, 'learning_rate': 1.9228842699935023e-05, 'num_tokens': 1382400.0, 'mean_token_accuracy': 0.7455671906471253, 'epoch': 0.72}    
+{'loss': 1.0352, 'grad_norm': 0.8091306090354919, 'learning_rate': 1.5549381473728602e-05, 'num_tokens': 1440000.0, 'mean_token_accuracy': 0.7553228688240051, 'epoch': 0.75}    
+{'loss': 1.1013, 'grad_norm': 0.8377342820167542, 'learning_rate': 1.219516634167005e-05, 'num_tokens': 1497600.0, 'mean_token_accuracy': 0.7400698089599609, 'epoch': 0.78}     
+{'loss': 1.0621, 'grad_norm': 0.7309731245040894, 'learning_rate': 9.197864235074422e-06, 'num_tokens': 1555200.0, 'mean_token_accuracy': 0.7442233884334564, 'epoch': 0.81}     
+{'loss': 1.0873, 'grad_norm': 0.7154144644737244, 'learning_rate': 6.585772492127612e-06, 'num_tokens': 1612800.0, 'mean_token_accuracy': 0.7386561954021453, 'epoch': 0.84}     
+{'loss': 1.0082, 'grad_norm': 0.8076398372650146, 'learning_rate': 4.383551704519789e-06, 'num_tokens': 1670400.0, 'mean_token_accuracy': 0.7581675386428833, 'epoch': 0.87}     
+{'loss': 1.0484, 'grad_norm': 0.8078758716583252, 'learning_rate': 2.6119928983706743e-06, 'num_tokens': 1728000.0, 'mean_token_accuracy': 0.7508377015590668, 'epoch': 0.9}     
+{'loss': 1.0388, 'grad_norm': 0.7226002216339111, 'learning_rate': 1.2878212474768892e-06, 'num_tokens': 1785600.0, 'mean_token_accuracy': 0.7529144871234894, 'epoch': 0.93}    
+{'loss': 1.113, 'grad_norm': 0.8913945555686951, 'learning_rate': 4.2353817201196135e-07, 'num_tokens': 1843200.0, 'mean_token_accuracy': 0.7349214673042297, 'epoch': 0.96}     
+{'loss': 1.0572, 'grad_norm': 0.896757185459137, 'learning_rate': 2.730331341508352e-08, 'num_tokens': 1900800.0, 'mean_token_accuracy': 0.7457766091823578, 'epoch': 0.99}      
+{'train_runtime': 2936.4785, 'train_samples_per_second': 3.403, 'train_steps_per_second': 0.567, 'train_loss': 1.1068138452280327, 'num_tokens': 1918656.0, 'mean_token_accuracy': 0.7540357783436775, 'epoch': 1.0}
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1666/1666 [48:56<00:00,  1.76s/it]
+/Users/edrikisaian/Documents/Advanced_AI/AdvancedAI_IndividualProject/venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py:684: UserWarning: 'pin_memory' argument is set as true but not supported on MPS now, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 510/510 [06:23<00:00,  1.33it/s]
+Eval loss: 1.0645450353622437  | Eval ppl: 2.899519505082959
+
+✅ Finished. Trained on first 5.0% of train.jsonl and evaluated on val.jsonl. LoRA adapter saved to: /Users/edrikisaian/Documents/Advanced_AI/AdvancedAI_IndividualProject/recipes-lora-1B
+(venv) edrikisaian@Mac AdvancedAI_IndividualProject % 
+
+
+
+!!! This is the result of training the model with 5% of the train.jsonl file and evaluating with val.jsonl.
+!!! The reason i did only the 5%, is because training on the entire file takes incredibly long.
+!!! The screenshot inside the Sandbox folder shows it takes 12h+ to train.
+!!! It is possible to enhance this project and let it actually train for 12 hours, but I chose not to because this project is rather for illustration purposes,
+!!! yet this message is for showing what should/could be the actual final result if I were to train the entire train.jsonl file on the model.
