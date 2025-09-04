@@ -15,18 +15,18 @@ os.makedirs(OUT_DIR, exist_ok=True)
 os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
 os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
-SEQ_LEN        = int(os.environ.get("SEQ_LEN", "192"))
-TOK_NUM_PROC   = int(os.environ.get("TOK_NUM_PROC", "2"))
-DL_WORKERS     = int(os.environ.get("DL_WORKERS", "1"))
-BATCH          = int(os.environ.get("BATCH", "6"))
-GRAD_ACC       = int(os.environ.get("GRAD_ACC", "1"))
-MAX_SAMPLES    = int(os.environ.get("MAX_SAMPLES", "0"))
-TRAIN_FRACTION = float(os.environ.get("TRAIN_FRACTION", "0.05"))
+SEQ_LEN        = int(os.environ.get("SEQ_LEN", "192"))            # max sequence length (tokens per sample), default 192
+TOK_NUM_PROC   = int(os.environ.get("TOK_NUM_PROC", "2"))         # number of processes for tokenization, default 2
+DL_WORKERS     = int(os.environ.get("DL_WORKERS", "1"))           # DataLoader worker threads, default 1
+BATCH          = int(os.environ.get("BATCH", "6"))                # 6 rows per training set
+GRAD_ACC       = int(os.environ.get("GRAD_ACC", "1"))             # gradient accumulation steps, default 1 (no accumulation)
+MAX_SAMPLES    = int(os.environ.get("MAX_SAMPLES", "0"))          # optional limit on total samples (0 = no limit)
+TRAIN_FRACTION = float(os.environ.get("TRAIN_FRACTION", "0.05"))  # fraction of training data to actually use, default 5%
 
 def build_tokenizer():
     tok = AutoTokenizer.from_pretrained(BASE_ID, use_fast=True)
-    tok.padding_side = "right"
-    tok.truncation_side = "right"
+    tok.padding_side = "right" # add fillers to make all sentences have an equal amount of tokens
+    tok.truncation_side = "right" # if sentence longer than max length, cut off right side
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     return tok
@@ -35,13 +35,13 @@ def tokenize_file(tokenizer, data_fp, apply_subsample=False, fraction=None):
     ds = load_dataset("json", data_files=data_fp, split="train")
     if fraction is not None and 0 < fraction < 1.0:
         n = max(1, int(len(ds) * fraction))
-        ds = ds.select(range(n))
+        ds = ds.select(range(n)) # It trims the dataset to the first fraction of rows.
     def _to_text(ex):
         t = ex.get("text", "")
         return {"text": t if isinstance(t, str) else str(t)}
     ds = ds.map(_to_text, remove_columns=[c for c in ds.column_names if c != "text"])
     def tok_batch(batch):
-        texts = [x + tokenizer.eos_token for x in batch["text"]]
+        texts = [x + tokenizer.eos_token for x in batch["text"]] # model knows where the text ends
         enc = tokenizer(
             texts,
             max_length=SEQ_LEN,
@@ -77,12 +77,12 @@ def main():
 
     model = build_model()
 
-    peft_cfg = LoraConfig(
+    peft_cfg = LoraConfig( # It sets up LoRA to fine-tune small adapters in key transformer layers of a causal LM.
         r=16, lora_alpha=32, lora_dropout=0.05, task_type="CAUSAL_LM",
         target_modules=["q_proj","k_proj","v_proj","o_proj","gate_proj","up_proj","down_proj"],
     )
 
-    sft_cfg = SFTConfig(
+    sft_cfg = SFTConfig( # defining training process
         output_dir=OUT_DIR,
         num_train_epochs=1,
         per_device_train_batch_size=BATCH,

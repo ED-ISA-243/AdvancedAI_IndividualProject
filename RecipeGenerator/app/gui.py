@@ -25,6 +25,7 @@ else:
     device = "cpu"
 dtype = torch.float16 if device in ("mps", "cuda") else torch.float32
 
+# load tokenizer and ensure pad_token exists (fallback to EOS)
 tok = AutoTokenizer.from_pretrained(BASE, local_files_only=True)
 if tok.pad_token is None:
     tok.pad_token = tok.eos_token
@@ -32,7 +33,7 @@ if tok.pad_token is None:
 base = AutoModelForCausalLM.from_pretrained(
     BASE,
     torch_dtype=dtype,
-    attn_implementation="eager",
+    attn_implementation="eager", # tells Hugging Face how to run the attention mechanism inside the model. eager is default.
     low_cpu_mem_usage=True,
     local_files_only=True,
 )
@@ -44,14 +45,14 @@ model = (
 )
 
 cfg = GenerationConfig(
-    max_new_tokens=520,
+    max_new_tokens=500,
     do_sample=False,
     temperature=None,
     top_p=None,
     repetition_penalty=1.02,
     eos_token_id=tok.eos_token_id,
     pad_token_id=tok.pad_token_id,
-    use_cache=True,
+    use_cache=True, # reuse paste kv tokes. in transformers, every token depends on all previous tokens.
 )
 
 def bullets(s: str) -> str:
@@ -68,11 +69,10 @@ def enforce_format(generated: str, input_ings: str) -> str:
         else:
             out = out + "\n\n" + used
 
-    import re as _re
-    m = _re.search(r"Directions:\n((?:\d+\..*\n?)*)", out)
+    m = re.search(r"Directions:\n((?:\d+\..*\n?)*)", out) # Ensure directions has 5 steps
     if m:
         steps_block = m.group(1)
-        steps = _re.findall(r"^\d+\.\s", steps_block, flags=_re.MULTILINE)
+        steps = re.findall(r"^\d+\.\s", steps_block, flags=re.MULTILINE)
         if len(steps) < 5:
             fillers = ["Serve immediately.", "Enjoy warm.", "Plate and serve.", "Garnish if desired."]
             to_add = 5 - len(steps)
@@ -81,7 +81,7 @@ def enforce_format(generated: str, input_ings: str) -> str:
     return out
 
 def build_prompt(ings: str) -> str:
-    fewshot_user = (
+    fewshot_user = ( # giving example to model
         "Ingredients:\n- 2 eggs\n- 100 g flour\n- 50 g sugar\n\n"
         "Return exactly 1 recipe. Any number of ingredients from the list is allowed. "
         "Use ONLY the listed items. You may use additional ingredient: oil, butter, salt, pepper, water"
@@ -127,17 +127,17 @@ def build_prompt(ings: str) -> str:
         {"role": "user", "content": user_msg},
     ]
     from transformers import PreTrainedTokenizerBase
-    prompt = tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    prompt = tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=True) # tok is the loaded tokenizer
     return prompt
 
 def generate_recipe(ings: str) -> str:
     prompt = build_prompt(ings)
-    enc = tok(prompt, return_tensors="pt", truncation=True, max_length=4096)
+    enc = tok(prompt, return_tensors="pt", truncation=True, max_length=4096) # make encodings (kv) using tokenizer, instruct supports up to 4096
     enc = {k: v.to(device) for k, v in enc.items()}
-    with torch.no_grad():
+    with torch.no_grad(): # saves memory and enhances speed
         out = model.generate(**enc, generation_config=cfg)
-    gen_ids = out[0][enc["input_ids"].shape[1]:]
-    text = tok.decode(gen_ids, skip_special_tokens=True).strip()
+    gen_ids = out[0][enc["input_ids"].shape[1]:] # only keep new generated part
+    text = tok.decode(gen_ids, skip_special_tokens=True).strip() # string
     return enforce_format(text, ings)
 
 class App(tk.Tk):
@@ -180,14 +180,14 @@ class App(tk.Tk):
         self.status.config(text="Generating…")
         self.txt.delete("1.0", "end")
 
-        def worker():
+        def worker(): # makes recipe generation seperate of interaction with the GUI. freezes otherwise
             try:
                 text = generate_recipe(ings)
             except Exception as e:
                 text = f"Error: {e}"
             self.after(0, lambda: self.show_result(text))
 
-        threading.Thread(target=worker, daemon=True).start()
+        threading.Thread(target=worker, daemon=True).start() # start new background thread running worker()
 
     def show_result(self, text: str):
         self.txt.insert("1.0", text + "\n")
